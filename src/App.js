@@ -1,16 +1,18 @@
-import Banner from "./components/Banner/Banner";
-import Footer from "./components/Footer/Footer";
-import MovieList from "./components/MovieList/MovieList";
-import NavigationBar from "./components/NavigationBar";
+import { Route, Routes } from "react-router-dom";
+import DefaultLayout from "./layouts/DefaultLayout/DefaultLayout";
+import HomePage from "./pages/HomePage/HomePage";
+import MoviesDetailPage from "./pages/MoviesDetailPage/MoviesDetailPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 function App() {
     return (
-        <div className="App">
-            <NavigationBar />
-            <Banner />
-            <MovieList />
-            <Footer />
-        </div>
+        <Routes>
+            <Route element={<DefaultLayout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/movies/:movieId" element={<MoviesDetailPage />} />
+                <Route path="/search" element={<SearchPage />} />
+            </Route>
+        </Routes>
     );
 }
 
