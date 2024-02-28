@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavigationBar() {
     const [show, setShow] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,6 +24,10 @@ function NavigationBar() {
         };
     }, []);
 
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+        navigate(`/search/?q=${e.target.value}`);
+    };
     return (
         <nav
             className={`fixed top-0 w-full z-10 px-5 py-5 flex justify-between items-center transition-all ease-in duration-500 ${
@@ -33,6 +40,14 @@ function NavigationBar() {
                 className="fixed left-10 w-20 object-contain"
                 onClick={() => (window.location.href = "/")}
                 style={{ objectFit: "contain" }}
+            />
+
+            <input
+                className="fixed bg-[#000000c7] rounded text-white p-1 border-none left-1/2 transform -translate-x-1/2"
+                value={searchValue}
+                onChange={handleChange}
+                type="text"
+                placeholder="영화를 검색해 주세요"
             />
 
             <img
